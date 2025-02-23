@@ -1,0 +1,98 @@
+version: "2.2"
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ledger_account
+      MYSQL_USER: tanvi
+      MYSQL_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - banking-network
+
+  # Kafka (Standalone Mode, No Zookeeper Required in Newer Versions)
+  kafka:
+    image: apache/kafka:3.9.0
+    container_name: kafka
+    environment:
+      KAFKA_CFG_NODE_ID: 1
+      KAFKA_CFG_PROCESS_ROLES: "broker,controller"
+      KAFKA_CFG_LISTENERS: "PLAINTEXT://:9092,CONTROLLER://:9093"
+      KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: "1@kafka:9093"
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT"
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
+    ports:
+      - "9092:9092"
+    networks:
+      - banking-network
+
+  # DynamoDB Local
+  dynamodb:
+    image: amazon/dynamodb-local
+    container_name: dynamodb
+    command: "-jar DynamoDBLocal.jar -sharedDb"
+    ports:
+      - "8000:8000"
+    networks:
+      - banking-network
+
+  # Gateway Service (API Gateway)
+  gateway-service:
+    build: 
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    depends_on:
+      - mysql
+      - kafka
+      - transaction-processor
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: ledger
+      KAFKA_BROKER: kafka:9092
+    networks:
+      - banking-network
+
+  # Transaction Service (Handles Banking Transactions)
+  transaction-processor:
+    build: 
+      context: ./transaction-processor
+      dockerfile: Dockerfile
+    container_name: transaction-processor
+    depends_on:
+      - kafka
+      - dynamodb
+    ports:
+      - "8081:8081"
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: ledger
+      KAFKA_BROKER: kafka:9092
+      DYNAMODB_ENDPOINT: http://dynamodb:8000
+    networks:
+      - banking-network
+
+volumes:
+  mysql_data:
+
+networks:
+  banking-network:
+    driver: bridge
