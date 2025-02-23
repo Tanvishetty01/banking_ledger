@@ -1,7 +1,6 @@
 package model
 
 import (
-
 	uuid "github.com/satori/go.uuid"
 	"gorm.io/gorm"
 	"time"
@@ -15,17 +14,15 @@ type Transaction struct {
 	TransactionType string    `gorm:"not null" json:"transaction_type"`
 	Notes           string    `json:"notes"`
 
-	AccountID   string    `gorm:"not null" json:"account_id"`
-	ToAccountID *string   `gorm:"null" json:"to_account_id"`
-	CustomerID  string    `gorm:"not null" json:"customer_id"`
+	AccountID   string  `gorm:"not null" json:"account_id"`
+	ToAccountID *string `gorm:"null" json:"to_account_id"`
+	CustomerID  string  `gorm:"not null" json:"customer_id"`
 
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
 
-
 func (transaction *Transaction) BeforeCreate(tx *gorm.DB) error {
 	transaction.TransactionID = uuid.NewV4()
 	return nil
 }
-

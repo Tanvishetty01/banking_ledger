@@ -1,7 +1,6 @@
 package service
 
 import (
-
 	"banking_ledger/gateway-service/models"
 	repo "banking_ledger/gateway-service/repo"
 
@@ -22,7 +21,7 @@ type AccountService struct {
 func NewAccountService(ar repo.AccountRepository) IAccountService {
 	return &AccountService{
 		accountRepo: ar,
-	}	
+	}
 }
 
 // CreateAccount creates a new account

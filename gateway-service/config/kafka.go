@@ -12,8 +12,8 @@ import (
 
 // Kafka configuration details
 const (
-	BootstrapServers   = "localhost:9092"
-	ConfirmationTopic  = "transaction-confirmations"
+	BootstrapServers  = "localhost:9092"
+	ConfirmationTopic = "transaction-confirmations"
 	GroupID           = "transaction-processor"
 )
 

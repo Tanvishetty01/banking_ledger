@@ -23,9 +23,9 @@ func NewTransactionRepo() TransactionRepository {
 // SaveTransaction inserts a new transaction into the database
 func (r *TransactionRepo) SaveTransaction(transaction *model.Transaction, tx *gorm.DB) error {
 	err := config.DB.Create(transaction).Error
-	if err != nil {	
+	if err != nil {
 		tx.Rollback()
-        return err
+		return err
 	}
 	return nil
 }

@@ -48,7 +48,6 @@ func (h *AccountHandler) CreateAccount(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{"message": "Account created", "account": account})
 }
 
-
 func validateAccount(account model.Account) error {
 	if account.AccountID == uuid.Nil {
 		return errors.New("AccountID is required")

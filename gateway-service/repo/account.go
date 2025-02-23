@@ -37,8 +37,8 @@ func (r *AccountRepo) GetAccountByID(accountID string) (*model.Account, error) {
 func (r *AccountRepo) UpdateAccount(account *model.Account, tx *gorm.DB) error {
 	err := config.DB.Save(account).Error
 	if err != nil {
-        tx.Rollback()
-        return err
-    }
+		tx.Rollback()
+		return err
+	}
 	return nil
 }

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"log"
 	"banking_ledger/transaction-processor/config"
 	"banking_ledger/transaction-processor/handler"
+	"log"
 )
 
 func main() {

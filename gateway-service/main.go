@@ -17,7 +17,6 @@
 // 	router.Run(":8080") // Gin handles HTTP server
 // }
 
-
 package main
 
 import "banking_ledger/gateway-service/routes"

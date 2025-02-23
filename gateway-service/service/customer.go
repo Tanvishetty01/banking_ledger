@@ -29,7 +29,7 @@ func NewCustomerService(cr repo.CustomerRepository) ICustomerService {
 
 // CreateCustomer handles creating a new customer
 func (s *CustomerService) CreateCustomer(customer *model.Customer) error {
-	customer.CustomerID= uuid.NewV4()
+	customer.CustomerID = uuid.NewV4()
 	customer.CreatedAt = time.Now()
 	customer.UpdatedAt = time.Now()
 	return s.customerRepo.CreateCustomer(customer)

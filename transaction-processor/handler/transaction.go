@@ -63,10 +63,10 @@ func saveToDynamoDB(event model.Transaction) {
 		"amount":           &types.AttributeValueMemberN{Value: fmt.Sprintf("%.2f", event.Amount)},
 		"transaction_type": &types.AttributeValueMemberS{Value: event.TransactionType},
 		"notes":            &types.AttributeValueMemberS{Value: event.Notes},
-		"from_account_id": &types.AttributeValueMemberS{Value: event.AccountID},
-		"to_account_id": ai,
-		"customer_id":   &types.AttributeValueMemberS{Value: event.CustomerID},
-		"timestamp": &types.AttributeValueMemberS{Value: event.UpdatedAt.String()},
+		"from_account_id":  &types.AttributeValueMemberS{Value: event.AccountID},
+		"to_account_id":    ai,
+		"customer_id":      &types.AttributeValueMemberS{Value: event.CustomerID},
+		"timestamp":        &types.AttributeValueMemberS{Value: event.UpdatedAt.String()},
 	}
 	_, err := config.DynamoDB.PutItem(context.TODO(), &dynamodb.PutItemInput{
 		TableName: aws.String("Transactions"),

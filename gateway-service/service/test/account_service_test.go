@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"banking_ledger/gateway-service/models"
-	"banking_ledger/gateway-service/service"
 	"banking_ledger/gateway-service/repo/test/mocks"
+	"banking_ledger/gateway-service/service"
 
 	"github.com/satori/go.uuid"
 	"github.com/stretchr/testify/assert"
@@ -15,10 +15,10 @@ import (
 
 func TestCreateAccount(t *testing.T) {
 	tests := []struct {
-		name          string
-		account       *model.Account
-		repoResponse  error
-		expectedError string
+		name           string
+		account        *model.Account
+		repoResponse   error
+		expectedError  string
 		shouldCallRepo bool
 	}{
 		{
@@ -27,8 +27,8 @@ func TestCreateAccount(t *testing.T) {
 				CustomerID: uuid.NewV4(),
 				Amount:     1000.0,
 			},
-			repoResponse:  nil,
-			expectedError: "",
+			repoResponse:   nil,
+			expectedError:  "",
 			shouldCallRepo: true,
 		},
 		{
@@ -37,8 +37,8 @@ func TestCreateAccount(t *testing.T) {
 				CustomerID: uuid.NewV4(),
 				Amount:     1000.0,
 			},
-			repoResponse:  errors.New("database error"),
-			expectedError: "database error",
+			repoResponse:   errors.New("database error"),
+			expectedError:  "database error",
 			shouldCallRepo: true,
 		},
 	}
@@ -62,7 +62,6 @@ func TestCreateAccount(t *testing.T) {
 				assert.Equal(t, tt.expectedError, err.Error())
 			}
 
-			// mockRepo.AssertExpectations(t)
 		})
 	}
 }

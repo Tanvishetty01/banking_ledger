@@ -9,8 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
-
 // ICustomerHandler defines the interface for customer handlers
 type ICustomerHandler interface {
 	CreateCustomer(c *gin.Context)

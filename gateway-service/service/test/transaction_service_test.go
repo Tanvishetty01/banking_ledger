@@ -4,9 +4,9 @@ import (
 	"errors"
 	"testing"
 
-	"banking_ledger/gateway-service/repo/test/mocks"
 	kafkaMocks "banking_ledger/gateway-service/config/mocks"
 	"banking_ledger/gateway-service/models"
+	"banking_ledger/gateway-service/repo/test/mocks"
 	"banking_ledger/gateway-service/service"
 
 	"github.com/stretchr/testify/assert"
@@ -14,14 +14,14 @@ import (
 )
 
 func TestPerformTransaction(t *testing.T) {
-	newID  := "71a93c64-5a61-4046-85aa-ad6a85d06b9d"
+	newID := "71a93c64-5a61-4046-85aa-ad6a85d06b9d"
 	tests := []struct {
-		name          string
-		transaction   *model.Transaction
-		account       *model.Account
-		toAccount     *model.Account
-		repoResponse  error
-		expectedError string
+		name           string
+		transaction    *model.Transaction
+		account        *model.Account
+		toAccount      *model.Account
+		repoResponse   error
+		expectedError  string
 		shouldCallRepo bool
 	}{
 		{
@@ -34,8 +34,8 @@ func TestPerformTransaction(t *testing.T) {
 			account: &model.Account{
 				Amount: 1000.0,
 			},
-			repoResponse:  nil,
-			expectedError: "",
+			repoResponse:   nil,
+			expectedError:  "",
 			shouldCallRepo: true,
 		},
 		{
@@ -48,8 +48,8 @@ func TestPerformTransaction(t *testing.T) {
 			account: &model.Account{
 				Amount: 1000.0,
 			},
-			repoResponse:  nil,
-			expectedError: "insufficient funds",
+			repoResponse:   nil,
+			expectedError:  "insufficient funds",
 			shouldCallRepo: false,
 		},
 		{
@@ -66,8 +66,8 @@ func TestPerformTransaction(t *testing.T) {
 			toAccount: &model.Account{
 				Amount: 500.0,
 			},
-			repoResponse:  nil,
-			expectedError: "",
+			repoResponse:   nil,
+			expectedError:  "",
 			shouldCallRepo: true,
 		},
 		{
@@ -81,8 +81,8 @@ func TestPerformTransaction(t *testing.T) {
 			account: &model.Account{
 				Amount: 1000.0,
 			},
-			repoResponse:  errors.New("destination account not found"),
-			expectedError: "destination account not found",
+			repoResponse:   errors.New("destination account not found"),
+			expectedError:  "destination account not found",
 			shouldCallRepo: true,
 		},
 	}
@@ -101,7 +101,6 @@ func TestPerformTransaction(t *testing.T) {
 			mockAccountRepo.On("UpdateAccount", mock.Anything, mock.Anything).Return(nil)
 			mockTransactionRepo.On("SaveTransaction", mock.Anything, mock.Anything).Return(tt.repoResponse)
 			mockProducer.On("ProduceTransaction", mock.Anything).Return(nil)
-			
 
 			err := transactionService.PerformTransaction(tt.transaction)
 

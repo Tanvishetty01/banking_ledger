@@ -1343,9 +1343,9 @@ func (a *AdminClient) cToDeleteACLsResults(cDeleteACLsResResponse **C.rd_kafka_D
 // CreateACLs creates one or more ACL bindings.
 //
 // Parameters:
-//  * `ctx` - context with the maximum amount of time to block, or nil for indefinite.
-//  * `aclBindings` - A slice of ACL binding specifications to create.
-//  * `options` - Create ACLs options
+//   - `ctx` - context with the maximum amount of time to block, or nil for indefinite.
+//   - `aclBindings` - A slice of ACL binding specifications to create.
+//   - `options` - Create ACLs options
 //
 // Returns a slice of CreateACLResult with a ErrNoError ErrorCode when the operation was successful
 // plus an error that is not nil for client level errors
@@ -1412,15 +1412,15 @@ func (a *AdminClient) CreateACLs(ctx context.Context, aclBindings ACLBindings, o
 // DescribeACLs matches ACL bindings by filter.
 //
 // Parameters:
-//  * `ctx` - context with the maximum amount of time to block, or nil for indefinite.
-//  * `aclBindingFilter` - A filter with attributes that must match.
+//   - `ctx` - context with the maximum amount of time to block, or nil for indefinite.
+//   - `aclBindingFilter` - A filter with attributes that must match.
 //     string attributes match exact values or any string if set to empty string.
 //     Enum attributes match exact values or any value if ending with `Any`.
 //     If `ResourcePatternType` is set to `ResourcePatternTypeMatch` returns ACL bindings with:
-//     - `ResourcePatternTypeLiteral` pattern type with resource name equal to the given resource name
-//     - `ResourcePatternTypeLiteral` pattern type with wildcard resource name that matches the given resource name
-//     - `ResourcePatternTypePrefixed` pattern type with resource name that is a prefix of the given resource name
-//  * `options` - Describe ACLs options
+//   - `ResourcePatternTypeLiteral` pattern type with resource name equal to the given resource name
+//   - `ResourcePatternTypeLiteral` pattern type with wildcard resource name that matches the given resource name
+//   - `ResourcePatternTypePrefixed` pattern type with resource name that is a prefix of the given resource name
+//   - `options` - Describe ACLs options
 //
 // Returns a slice of ACLBindings when the operation was successful
 // plus an error that is not `nil` for client level errors
@@ -1468,15 +1468,15 @@ func (a *AdminClient) DescribeACLs(ctx context.Context, aclBindingFilter ACLBind
 // DeleteACLs deletes ACL bindings matching one or more ACL binding filters.
 //
 // Parameters:
-//  * `ctx` - context with the maximum amount of time to block, or nil for indefinite.
-//  * `aclBindingFilters` - a slice of ACL binding filters to match ACLs to delete.
+//   - `ctx` - context with the maximum amount of time to block, or nil for indefinite.
+//   - `aclBindingFilters` - a slice of ACL binding filters to match ACLs to delete.
 //     string attributes match exact values or any string if set to empty string.
 //     Enum attributes match exact values or any value if ending with `Any`.
 //     If `ResourcePatternType` is set to `ResourcePatternTypeMatch` deletes ACL bindings with:
-//     - `ResourcePatternTypeLiteral` pattern type with resource name equal to the given resource name
-//     - `ResourcePatternTypeLiteral` pattern type with wildcard resource name that matches the given resource name
-//     - `ResourcePatternTypePrefixed` pattern type with resource name that is a prefix of the given resource name
-//  * `options` - Delete ACLs options
+//   - `ResourcePatternTypeLiteral` pattern type with resource name equal to the given resource name
+//   - `ResourcePatternTypeLiteral` pattern type with wildcard resource name that matches the given resource name
+//   - `ResourcePatternTypePrefixed` pattern type with resource name that is a prefix of the given resource name
+//   - `options` - Delete ACLs options
 //
 // Returns a slice of ACLBinding for each filter when the operation was successful
 // plus an error that is not `nil` for client level errors
