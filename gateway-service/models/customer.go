@@ -23,3 +23,7 @@ func (customer *Customer) BeforeCreate(tx *gorm.DB) error {
 	customer.CustomerID = uuid.NewV4()
 	return nil
 }
+
+func (Customer) TableName() string {
+	return "customer"
+}

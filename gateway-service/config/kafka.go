@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"os"
 
 	"banking_ledger/gateway-service/models"
 
@@ -12,7 +13,6 @@ import (
 
 // Kafka configuration details
 const (
-	BootstrapServers  = "localhost:9092"
 	ConfirmationTopic = "transaction-confirmations"
 	GroupID           = "transaction-processor"
 )
@@ -32,7 +32,7 @@ type Producer struct {
 // NewKafkaProducer creates a new Kafka producer instance
 func NewKafkaProducer() (KafkaProducer, error) {
 	p, err := kafka.NewProducer(&kafka.ConfigMap{
-		"bootstrap.servers": BootstrapServers,
+		"bootstrap.servers": os.Getenv("KAFKA_BOOT_STRAP_SERVER"),
 	})
 	if err != nil {
 		return nil, fmt.Errorf("failed to create producer: %w", err)

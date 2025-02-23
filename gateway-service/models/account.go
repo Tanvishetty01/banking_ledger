@@ -24,3 +24,7 @@ func (a *Account) BeforeCreate(tx *gorm.DB) (err error) {
 	a.AccountID = uuid.NewV4()
 	return nil
 }
+
+func (Account) TableName() string {
+	return "account"
+}

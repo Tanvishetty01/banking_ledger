@@ -26,3 +26,7 @@ func (transaction *Transaction) BeforeCreate(tx *gorm.DB) error {
 	transaction.TransactionID = uuid.NewV4()
 	return nil
 }
+
+func (Transaction) TableName() string {
+	return "transaction"
+}

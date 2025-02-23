@@ -27,6 +27,6 @@ func (r *CustomerRepo) CreateCustomer(customer *model.Customer) error {
 // GetCustomerByID fetches a customer by ID
 func (r *CustomerRepo) GetCustomerByID(customerID string) (*model.Customer, error) {
 	var customer model.Customer
-	err := config.DB.First(&customer, "id = ?", customerID).Error
+	err := config.DB.First(&customer, "customer_id = ?", customerID).Error
 	return &customer, err
 }

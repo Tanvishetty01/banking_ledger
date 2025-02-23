@@ -5,8 +5,10 @@ import (
 	"banking_ledger/gateway-service/handler"
 	"banking_ledger/gateway-service/repo"
 	"banking_ledger/gateway-service/service"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 // Server struct holds all dependencies
@@ -20,6 +22,10 @@ type Server struct {
 // NewServer initializes all dependencies and returns a server instance
 func NewServer() *Server {
 	// Initialize database connection
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("⚠️ Warning: No .env file found, using system environment variables")
+	}
 	config.ConnectDB()
 	kafkaProducer, _ := config.NewKafkaProducer()
 

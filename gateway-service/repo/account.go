@@ -2,7 +2,8 @@ package repo
 
 import (
 	"banking_ledger/gateway-service/config"
-	"banking_ledger/gateway-service/models"
+	model "banking_ledger/gateway-service/models"
+
 	"gorm.io/gorm"
 )
 
