@@ -1,0 +1,18 @@
+# Ignore vendor directory (if using Go Modules)
+vendor/
+
+# Binaries and build artifacts
+*.exe
+*.out
+*.test
+*.a
+*.o
+
+
+# Go cache and dependencies
+bin/
+pkg/
+*.sum
+*.mod
+go.sum
+go.mod
