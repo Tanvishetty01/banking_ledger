@@ -79,11 +79,3 @@ func saveToDynamoDB(event model.Transaction) {
 		log.Println("✅ Transaction saved to DynamoDB")
 	}
 }
-
-// Helper function to handle nil strings
-// func getString(value string) string {
-// 	if value == "" {
-// 		return "NULL"
-// 	}
-// 	return value
-// }

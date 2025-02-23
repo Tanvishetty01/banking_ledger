@@ -30,8 +30,8 @@ func InitDynamoDB() {
 			func(service, region string) (aws.Endpoint, error) {
 				if service == dynamodb.ServiceID {
 					return aws.Endpoint{
-						URL: "http://localhost:8000",
-						// URL: "http://dynamodb:8000", // Local DynamoDB URL // localhost:
+						// URL: "http://localhost:8000",
+						URL: "http://dynamodb:8000", // Local DynamoDB URL // localhost:
 					}, nil
 				}
 				return aws.Endpoint{}, &aws.EndpointNotFoundError{}

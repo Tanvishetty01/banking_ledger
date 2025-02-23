@@ -23,20 +23,3 @@ func (customer *Customer) BeforeCreate(tx *gorm.DB) error {
 	customer.CustomerID = uuid.NewV4()
 	return nil
 }
-
-// func Hash(password string) ([]byte, error) {
-// 	return bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-// }
-
-// func VerifyPassword(hashedPassword, password string) error {
-// 	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
-// }
-
-// func (customer *Customer) BeforeSave() error {
-// 	hashedPassword, err := Hash(customer.Password)
-// 	if err != nil {
-// 		return err
-// 	}
-// 	customer.Password = string(hashedPassword)
-// 	return nil
-// }

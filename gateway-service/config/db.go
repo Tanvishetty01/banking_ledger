@@ -16,7 +16,7 @@ var DB *gorm.DB
 func ConnectDB() {
 	var err error
 	dsn := "tanvi:root@tcp(localhost:3306)/ledger_account?charset=utf8mb4&parseTime=True&loc=Local" // MySQL DSN
-	// dsn := "host=localhost user=postgres password=yourpassword dbname=yourdb port=5432 sslmode=disable" // PostgreSQL DSN
+	// dsn := "tanvi:root@tcp(mysql:3306)/ledger_account?charset=utf8mb4&parseTime=True&loc=Local" // MySQL DSN
 
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
